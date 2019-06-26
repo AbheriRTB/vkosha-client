@@ -20,6 +20,10 @@
             android:label="@string/title_activity_list_display"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
+            android:name=".MultiTextViewDisplay"
+            android:label="@string/title_activity_list_display"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".DisplayPage"
             android:parentActivityName=".MainActivity">
 

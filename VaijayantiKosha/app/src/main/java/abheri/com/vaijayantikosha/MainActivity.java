@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
         EditText padam_txt;
 
-        Intent intent = new Intent(this, ExpListDisplay.class);
+        Intent intent = new Intent(this, MultiTextViewDisplay.class);
         padam_txt = (EditText)findViewById(R.id.ppadam);
         ppadam_text = padam_txt.getText().toString();
 
