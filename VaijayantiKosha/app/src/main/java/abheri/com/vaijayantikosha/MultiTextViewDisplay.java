@@ -57,7 +57,7 @@ public class MultiTextViewDisplay extends AppCompatActivity implements View.OnCl
             FlexboxLayout.LayoutParams rlp = new FlexboxLayout.LayoutParams(
                     LayoutParams.WRAP_CONTENT,
                     LayoutParams.WRAP_CONTENT);
-            rlp.topMargin = 200;
+            rlp.topMargin = 30;
             flexboxLayout.setLayoutParams(rlp);
             linearLayout.addView(flexboxLayout);
 
@@ -69,10 +69,10 @@ public class MultiTextViewDisplay extends AppCompatActivity implements View.OnCl
             RelativeLayout.LayoutParams params =
                     new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT,
                             LayoutParams.WRAP_CONTENT);
-            hdTextView.setTextSize((float)22.0);
+            hdTextView.setTextSize((float)25.0);
             hdTextView.setLayoutParams(params);
             hdTextView.setTextColor(getResources().getColor(myblue));
-            String arthaVarga = "अर्थः -  "+ vkList.get(0).headword + " | वर्गः - " + vkList.get(0).adhyaya + " | ";
+            String arthaVarga = "अर्थः -  "+ vkList.get(0).headword + " | वर्गः - " + vkList.get(0).adhyaya + "| " + vkList.get(0).eng_meaning +", "+ vkList.get(0).sans_meaning + " | ";
             hdTextView.setText(arthaVarga); //adding text
             flexboxLayout.addView(hdTextView, params);
 
@@ -92,7 +92,7 @@ public class MultiTextViewDisplay extends AppCompatActivity implements View.OnCl
                 }
                 params.addRule(RelativeLayout.ALIGN_BASELINE, pid);
                 params.addRule(RelativeLayout.RIGHT_OF, pid);
-                textView.setTextSize((float)22.0);
+                textView.setTextSize((float)25.0);
                 textView.setLayoutParams(params);
                 String comma=", ";
                 if(j == vkList.size()-1)
@@ -106,9 +106,8 @@ public class MultiTextViewDisplay extends AppCompatActivity implements View.OnCl
     }
 
     public class Vkosha {
-
-        String padam, headword, jathi, adhyaya, linga, nigama, kanda;
-
+        String headword, padam, pratam, nigama, linga, adhyaya, kanda, eng_meaning, sans_meaning, synset, avyaya,
+                parapara, janyajanaka, patipatni, swaswamy, vaishistyam, anya, ajivika, avatara, jathi, upadhi;
     }
 
     public ArrayList<ArrayList<Vkosha>> parseJson(String jsonToParse) {
@@ -140,6 +139,21 @@ public class MultiTextViewDisplay extends AppCompatActivity implements View.OnCl
                         tmpVkosha.linga = jo.getString("linga");
                         tmpVkosha.nigama = jo.getString("nigama");
                         tmpVkosha.kanda = jo.getString("kanda");
+                        //Extras........
+
+                        tmpVkosha.eng_meaning = jo.getString("eng_meaning");
+                        tmpVkosha.sans_meaning = jo.getString("sans_meaning");
+                        //tmpVkosha.synset = jo.getString("synset");
+                        tmpVkosha.avyaya = jo.getString("avyaya");
+                        tmpVkosha.parapara = jo.getString("parapara");
+                        tmpVkosha.janyajanaka = jo.getString("janyajanaka");
+                        tmpVkosha.patipatni = jo.getString("patipatni");
+                        tmpVkosha.swaswamy = jo.getString("swaswamy");
+                        tmpVkosha.vaishistyam = jo.getString("vaishistyam");
+                        tmpVkosha.anya = jo.getString("anya");
+                        tmpVkosha.ajivika = jo.getString("ajivika");
+                        tmpVkosha.avatara = jo.getString("avatara");
+                        tmpVkosha.upadhi = jo.getString("upadhi");
 
                         tmpVKList.add(tmpVkosha);
                         vkoshaHashMap.put(tmpVkosha.padam, tmpVkosha);
