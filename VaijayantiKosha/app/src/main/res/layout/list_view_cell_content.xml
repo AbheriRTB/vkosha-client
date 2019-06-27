@@ -8,17 +8,6 @@
     android:descendantFocusability="blocksDescendants"
     android:paddingTop="5dp">
 
-    <ImageButton
-        android:id="@+id/infoBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:background="@android:color/transparent"
-        android:maxWidth="10px"
-        android:maxHeight="10px"
-        android:paddingRight="10dp"
-        android:src="@android:drawable/ic_dialog_info" />
-
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/listCell"
         android:layout_width="wrap_content"
@@ -27,7 +16,6 @@
         android:layout_marginTop="5dp"
         android:padding="2dp"
         android:text="Medium Text"
-        android:onClick="onClick"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#4d4d4d"
         android:textStyle="bold" />

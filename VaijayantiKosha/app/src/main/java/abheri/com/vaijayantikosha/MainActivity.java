@@ -11,6 +11,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.content.Intent;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.lang.String;
 
@@ -18,12 +21,15 @@ public class MainActivity extends AppCompatActivity {
 
     String ppadam_text = "";
     String dataStr = "";
+    String relation = "";
+    TextView relationTV;
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        relationTV = (TextView) findViewById(R.id.relation_edit);
 
         setSupportActionBar(toolbar);
 
@@ -35,6 +41,12 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        Intent intent = getIntent();
+        if(intent != null){
+            relation = intent.getStringExtra("Relation");
+            relationTV.setText(relation);
+        }
     }
 
     @Override
@@ -58,11 +70,19 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    public void sel_relation_click(View view){
+        Intent intent = new Intent(this, ListDisplay.class);
+        Toast.makeText(this,"Going to next activity" + dataStr, Toast.LENGTH_LONG).show();
+        startActivity(intent);
+    }
+
+
     public void submit_click(View view){
 
         EditText padam_txt;
 
-        Intent intent = new Intent(this, MultiTextViewDisplay.class);
+        Intent intent = new Intent(this,MultiTextViewDisplay.class);
         padam_txt = (EditText)findViewById(R.id.ppadam);
         ppadam_text = padam_txt.getText().toString();
 

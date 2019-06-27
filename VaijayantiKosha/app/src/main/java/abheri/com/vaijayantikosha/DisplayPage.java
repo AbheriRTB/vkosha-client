@@ -12,9 +12,11 @@ public class DisplayPage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_display_page);
+        setContentView(R.layout.list_display);
 
         Intent intent = getIntent();
+        Toast.makeText(this,"Here comes the list", Toast.LENGTH_LONG).show();
+
         String padam = intent.getStringExtra("PADAM");
         String synonyms = intent.getStringExtra("SYNONYMS");
 

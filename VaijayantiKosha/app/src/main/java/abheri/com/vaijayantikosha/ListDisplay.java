@@ -20,8 +20,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 
-
-public class ListDisplay extends Activity implements View.OnClickListener, AdapterView.OnItemClickListener {
+public class ListDisplay extends Activity {
 
     ImageButton info;
     ListView simpleList;
@@ -38,14 +37,13 @@ public class ListDisplay extends Activity implements View.OnClickListener, Adapt
         //setSupportActionBar(toolbar);
 
 
-
         Intent intent = getIntent();
-        String padam = intent.getStringExtra("PADAM");
-        String jsonString = intent.getStringExtra("SYNONYMS");
+        // String padam = intent.getStringExtra("PADAM");
+        //String jsonString = intent.getStringExtra("SYNONYMS");
 
 
-        myVkosha = parseJson(jsonString);
-        synArray = getSynonyms(myVkosha[0].synonym);
+        // myVkosha = parseJson(jsonString);
+        //synArray = getSynonyms(myVkosha[0].synonym);
 
 
 
@@ -53,17 +51,24 @@ public class ListDisplay extends Activity implements View.OnClickListener, Adapt
         JSON newJson = new JSON();*/
 
 
-        String countryList[] = {"India", "China", "australia", "Portugle", "America", "NewZealand"};
+        String relationList[] = {"Synsets", "Ontology", "Holonym", "Meronym", "Hypernym", "Hyponym"};
 
-        simpleList = (ListView) findViewById(R.id.synList);
-        simpleList.setOnItemClickListener(this);
-        arrayAdapter = new ArrayAdapter<String>(this, R.layout.list_view_cell_content, R.id.listCell, synArray);
+        simpleList = (ListView) findViewById(R.id.relList);
+        arrayAdapter = new ArrayAdapter<String>(this, R.layout.list_view_cell_content, R.id.listCell, relationList);
 
         simpleList.setAdapter(arrayAdapter);
 
+        simpleList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                doOnItemClick(adapterView, view, i, l);
+            }
+
+        });
 
 
- /*       FloatingActionButton fab = findViewById(R.id.fab);
+
+ /*    FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -81,33 +86,13 @@ public class ListDisplay extends Activity implements View.OnClickListener, Adapt
 
     }
 
-    public void onClick(View view) {
+    public void doOnItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-            Toast.makeText(this, "Ref :" + myVkosha[0].nigama, Toast.LENGTH_LONG).show();
-    }
-
-    @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-        String dataStr="";
-        Toast.makeText(this, "Ref :" + myVkosha[0].jathi, Toast.LENGTH_LONG).show();
-        TextView tv = view.findViewById(R.id.listCell);
-        try {
-            Runnable gdr = new GetData((String)tv.getText());
-            Thread gdt = new Thread(gdr);
-            gdt.start();
-            gdt.join();
-            dataStr = ((GetData) gdr).getReturnStr();
-
-            myVkosha = parseJson(dataStr);
-            synArray = getSynonyms(myVkosha[0].synonym);
-            arrayAdapter.clear();
-            arrayAdapter.addAll(synArray);
-            arrayAdapter.notifyDataSetChanged();
-
-        }catch (Exception e){
-
-        }
+        String dataStr = "";
+        Toast.makeText(this, arrayAdapter.getItem(i), Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(this,MainActivity.class);
+        intent.putExtra("Relation", arrayAdapter.getItem(i));
+        startActivity(intent);
     }
 
     public class Vkosha {
@@ -145,12 +130,12 @@ public class ListDisplay extends Activity implements View.OnClickListener, Adapt
                 }
 
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.toString());
         }
 
-        Object[] oba =  vKoshaArrayList.toArray();
-        Vkosha[] vkArray = Arrays.copyOf(oba,oba.length,Vkosha[].class);
+        Object[] oba = vKoshaArrayList.toArray();
+        Vkosha[] vkArray = Arrays.copyOf(oba, oba.length, Vkosha[].class);
         return vkArray;
     }
 }

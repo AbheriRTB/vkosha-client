@@ -10,12 +10,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="30dp"
-        android:text="Synonyms"
+        android:text="Relations"
         android:textSize="30sp"
         android:textStyle="bold" />
 
     <ListView
-        android:id="@+id/synList"
+        android:id="@+id/relList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"></ListView>
 
