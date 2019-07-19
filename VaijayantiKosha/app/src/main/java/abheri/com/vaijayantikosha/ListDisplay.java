@@ -3,6 +3,7 @@ package abheri.com.vaijayantikosha;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.util.JsonReader;
 import android.view.View;
 import android.widget.AdapterView;
@@ -28,6 +29,7 @@ public class ListDisplay extends Activity {
     Vkosha myVkosha[] = new Vkosha[5];
     String[] synArray = new String[20];
     ArrayAdapter<String> arrayAdapter;
+    String value ="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,21 +52,38 @@ public class ListDisplay extends Activity {
         /*JSONArray jsonArray = "[{id:\"1\", name:\"sql\"},{id:\"2\",name:\"android\"},{id:\"3\",name:\"mvc\"}]";
         JSON newJson = new JSON();*/
 
+        //Intent intent1 = getIntent();
+        value = intent.getStringExtra("SEL_VALUE");
+
 
         String relationList[] = {"Synsets", "Ontology", "Holonym", "Meronym", "Hypernym", "Hyponym"};
+        String input_encode[] = {"Unicode-Devanagari","WX-alphabetic","Itrans-5.3", "Velthuis","KH","SLP1"};
+        String output_encode[] = {"Unicode-Devanagari", "Roman-Diacritic"};
+        String array_send[] = {};
 
         simpleList = (ListView) findViewById(R.id.relList);
-        arrayAdapter = new ArrayAdapter<String>(this, R.layout.list_view_cell_content, R.id.listCell, relationList);
+
+        switch (value){
+            case "1": arrayAdapter = new ArrayAdapter<String>(this, R.layout.list_view_cell_content, R.id.listCell, input_encode);break;
+            case "2": arrayAdapter = new ArrayAdapter<String>(this, R.layout.list_view_cell_content, R.id.listCell, relationList);break;
+            case "3": arrayAdapter = new ArrayAdapter<String>(this, R.layout.list_view_cell_content, R.id.listCell, output_encode);break;
+
+        }
+        //simpleList = (ListView) findViewById(R.id.relList);
+
+        //arrayAdapter = new ArrayAdapter<String>(this, R.layout.list_view_cell_content, R.id.listCell, array_send);
 
         simpleList.setAdapter(arrayAdapter);
 
         simpleList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-                doOnItemClick(adapterView, view, i, l);
-            }
+        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            doOnItemClick(adapterView, view, i, l);
+        }
 
         });
+
+
+
 
 
 
@@ -79,6 +98,8 @@ public class ListDisplay extends Activity {
     }
 
 
+
+
     String[] getSynonyms(String synonymStr) {
         String[] retStr;
         retStr = synonymStr.split(",");
@@ -91,7 +112,12 @@ public class ListDisplay extends Activity {
         String dataStr = "";
         Toast.makeText(this, arrayAdapter.getItem(i), Toast.LENGTH_LONG).show();
         Intent intent = new Intent(this,MainActivity.class);
-        intent.putExtra("Relation", arrayAdapter.getItem(i));
+        switch (value){
+            case "1": intent.putExtra("InputType",arrayAdapter.getItem(i));break;
+            case "2": intent.putExtra("Relation", arrayAdapter.getItem(i));break;
+            case "3": intent.putExtra("OutputType",arrayAdapter.getItem(i));break;
+        }
+
         startActivity(intent);
     }
 

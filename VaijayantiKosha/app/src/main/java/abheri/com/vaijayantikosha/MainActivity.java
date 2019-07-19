@@ -1,6 +1,7 @@
 package abheri.com.vaijayantikosha;
 
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -21,15 +22,20 @@ public class MainActivity extends AppCompatActivity {
 
     String ppadam_text = "";
     String dataStr = "";
-    String relation = "";
-    TextView relationTV;
+    String relation = "", in_code= "",out_code = "";
+    TextView relationTV, in_codeTV,out_codeTV;
+    SharedPreferences mySP;
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        mySP = getSharedPreferences("VKSP", MODE_PRIVATE);
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         relationTV = (TextView) findViewById(R.id.relation_edit);
+        in_codeTV = (TextView) findViewById(R.id.inputEncode);
+        out_codeTV = (TextView) findViewById(R.id.outputEncode);
 
         setSupportActionBar(toolbar);
 
@@ -42,11 +48,54 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Intent intent = getIntent();
-        if(intent != null){
-            relation = intent.getStringExtra("Relation");
+        //First read the values from the Shared preference and update TextViews
+        if(mySP != null){
+            if(mySP.contains("Relation"))
+                relation = mySP.getString("Relation", "");
+            if(mySP.contains("InputType"))
+                in_code = mySP.getString("InputType", "");
+            if(mySP.contains("OutputType"))
+                out_code = mySP.getString("OutputType", "");
+
             relationTV.setText(relation);
+            in_codeTV.setText(in_code);
+            out_codeTV.setText(out_code);
         }
+
+        //If the flow is coming from the List selection, use the Intent to get new values
+        Intent intent = getIntent();
+        if (intent != null) {
+            relation = intent.getStringExtra("Relation");
+            if (relation != null && relation != "")
+                relationTV.setText(relation);
+
+            in_code = intent.getStringExtra("InputType");
+            if (in_code != null && in_code != "")
+                in_codeTV.setText(in_code);
+
+            out_code = intent.getStringExtra("OutputType");
+            if (out_code != null && out_code != "")
+                out_codeTV.setText(out_code);
+        }
+
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        // Save UI state changes to the savedInstanceState.
+        // This bundle will be passed to onCreate if the process is
+        // killed and restarted.
+        SharedPreferences.Editor ed = mySP.edit();
+
+        if(relation != null && relation != "")
+            ed.putString("Relation", relation);
+        if(in_code != null && in_code != "")
+            ed.putString("InputType", in_code);
+        if(out_code != null && out_code != "")
+            ed.putString("OutputType", out_code);
+
+        ed.commit();
     }
 
     @Override
@@ -71,9 +120,44 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void sel_relation_click(View view){
+    public void input_clicked(View view){
+        //EditText inp_txt, out_txt;
+
+        list_to_be_displayed("1");
+    }
+
+    public void rel_clicked(View view) {
+
+        list_to_be_displayed("2");
+    }
+
+
+    public void output_clicked(View view) {
+        //EditText inp_txt, out_txt;
+
+        list_to_be_displayed("3");
+    }
+
+
+    public void list_to_be_displayed(String val){
+        EditText inp_txt, out_txt;
+
+
         Intent intent = new Intent(this, ListDisplay.class);
-        Toast.makeText(this,"Going to next activity" + dataStr, Toast.LENGTH_LONG).show();
+        inp_txt = (EditText)findViewById(R.id.inputEncode);
+        out_txt = (EditText)findViewById(R.id.outputEncode);
+
+        String input_code = inp_txt.getText().toString();
+        String output_code = out_txt.getText().toString();
+
+
+        intent.putExtra("INPUT_ENCODE", input_code);
+        intent.putExtra("OUTPUT_ENCODE", output_code);
+        intent.putExtra("SEL_VALUE", val);
+
+
+
+        Toast.makeText(this,"Going to next activity" + input_code, Toast.LENGTH_LONG).show();
         startActivity(intent);
     }
 
@@ -99,6 +183,9 @@ public class MainActivity extends AppCompatActivity {
        /* Toast.makeText(MainActivity.this, ppadam_text + "---->" + dataStr, Toast.LENGTH_LONG).show(); */
         intent.putExtra("PADAM", ppadam_text);
         intent.putExtra("SYNONYMS", dataStr);
+        intent.putExtra("RELATION", relation);
+        intent.putExtra("IN_TYPE",in_code);
+        intent.putExtra("OUT_TYPE", out_code);
 
         startActivity(intent);
 

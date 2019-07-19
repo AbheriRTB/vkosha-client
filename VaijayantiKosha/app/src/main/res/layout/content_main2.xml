@@ -59,20 +59,22 @@
         app:layout_constraintTop_toBottomOf="@+id/Intro" />
 
     <EditText
-        android:id="@+id/InputEncodingValue"
+        android:id="@+id/inputEncode"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
         android:layout_weight="1"
-        android:hint="Input type"
-        android:enabled="false"
+        android:hint="Select Input type"
+        android:enabled="true"
+        android:text=""
         android:inputType="textPersonName"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/textView3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView3" />
+        app:layout_constraintTop_toTopOf="@+id/textView3"
+        android:onClick="input_clicked"/>
 
     <TextView
         android:id="@+id/textView4"
@@ -129,7 +131,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView6"
         app:layout_constraintVertical_bias="0.0"
-        android:onClick="sel_relation_click"/>
+        android:onClick="rel_clicked"/>
 
     <TextView
         android:id="@+id/textView7"
@@ -139,7 +141,7 @@
         android:layout_marginLeft="32dp"
         android:layout_weight="1"
         android:text="Output Encoding:"
-        android:enabled="false"
+        android:enabled="true"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/outputEncode"
         app:layout_constraintStart_toStartOf="parent" />
@@ -153,8 +155,10 @@
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
         android:inputType="textPersonName"
-        android:enabled="false"
+        android:enabled="true"
+        android:text=""
         android:hint="Select Output"
+        android:onClick="output_clicked"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relation_edit" />

@@ -39,6 +39,9 @@ public class MultiTextViewDisplay extends AppCompatActivity implements View.OnCl
 
         String padam = intent.getStringExtra("PADAM");
         String jsonString = intent.getStringExtra("SYNONYMS");
+        String relation = intent.getStringExtra("RELATION");
+        String input_type = intent.getStringExtra("IN_TYPE");
+        String output_type = intent.getStringExtra("OUT_TYPE");
 
         //Toast.makeText(this, "Multi Text View Display Page",Toast.LENGTH_LONG).show();
         LinearLayout linearLayout= (LinearLayout) findViewById(R.id.multitext_linear); //find the linear layout
