@@ -24,7 +24,7 @@ import java.util.List;
 
 import static abheri.com.vaijayantikosha.R.color.myblue;
 
-public class MultiTextViewDisplay extends AppCompatActivity implements View.OnClickListener {
+public class DisplaySynonyms extends AppCompatActivity implements View.OnClickListener {
 
     ArrayList<TextView> tvArrayList = new ArrayList<TextView>();
     ArrayList<ArrayList<Vkosha>> vkoshaListDetail = new ArrayList<ArrayList<Vkosha>>();
@@ -75,7 +75,11 @@ public class MultiTextViewDisplay extends AppCompatActivity implements View.OnCl
             hdTextView.setTextSize((float)25.0);
             hdTextView.setLayoutParams(params);
             hdTextView.setTextColor(getResources().getColor(myblue));
-            String arthaVarga = "अर्थः -  "+ vkList.get(0).headword + " | वर्गः - " + vkList.get(0).adhyaya + "| " + vkList.get(0).eng_meaning +", "+ vkList.get(0).sans_meaning + " | ";
+            String arthaVarga = "अर्थः -  "+ vkList.get(0).headword + " | " +
+                    "Meaning - " + vkList.get(0).eng_meaning + " | " +
+                    "विवरणम् - " +  vkList.get(0).sans_meaning + " | " +
+                    "वर्गः - " + vkList.get(0).adhyaya + "| ";
+
             hdTextView.setText(arthaVarga); //adding text
             flexboxLayout.addView(hdTextView, params);
 
@@ -180,9 +184,11 @@ public class MultiTextViewDisplay extends AppCompatActivity implements View.OnCl
         if(str.indexOf(',') != -1) //Last padam in the list will not contain comma & space at the end
             str = str.substring(0, str.length()-2);
 
+        String displayStr1 = "काण्ड, वर्ग, श्लोक, पाद :: ";
+        String displayStr2 = "लिंग :: ";
         String nigama = vkoshaHashMap.get(str).nigama;
         String linga = vkoshaHashMap.get(str).linga;
 
-        Toast.makeText(this, str + " --> " + nigama + " " + linga,Toast.LENGTH_LONG).show();
+        Toast.makeText(this, displayStr1 + nigama + ", " + displayStr2 + linga,Toast.LENGTH_LONG).show();
     }
 }

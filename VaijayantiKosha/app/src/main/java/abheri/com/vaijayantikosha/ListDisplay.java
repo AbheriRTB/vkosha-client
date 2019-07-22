@@ -30,6 +30,7 @@ public class ListDisplay extends Activity {
     String[] synArray = new String[20];
     ArrayAdapter<String> arrayAdapter;
     String value ="";
+    TextView listTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,16 +58,26 @@ public class ListDisplay extends Activity {
 
 
         String relationList[] = {"Synsets", "Ontology", "Holonym", "Meronym", "Hypernym", "Hyponym"};
-        String input_encode[] = {"Unicode-Devanagari","WX-alphabetic","Itrans-5.3", "Velthuis","KH","SLP1"};
+        String input_encode[] = {"Unicode-Devanagari","WX-alphabetic"};
         String output_encode[] = {"Unicode-Devanagari", "Roman-Diacritic"};
         String array_send[] = {};
 
         simpleList = (ListView) findViewById(R.id.relList);
+        listTitle = (TextView) findViewById(R.id.listTitle);
 
         switch (value){
-            case "1": arrayAdapter = new ArrayAdapter<String>(this, R.layout.list_view_cell_content, R.id.listCell, input_encode);break;
-            case "2": arrayAdapter = new ArrayAdapter<String>(this, R.layout.list_view_cell_content, R.id.listCell, relationList);break;
-            case "3": arrayAdapter = new ArrayAdapter<String>(this, R.layout.list_view_cell_content, R.id.listCell, output_encode);break;
+            case "1":
+                arrayAdapter = new ArrayAdapter<String>(this, R.layout.list_view_cell_content, R.id.listCell, input_encode);
+                listTitle.setText("Input Encoding");
+                break;
+            case "2":
+                arrayAdapter = new ArrayAdapter<String>(this, R.layout.list_view_cell_content, R.id.listCell, relationList);
+                listTitle.setText("Relations");
+                break;
+            case "3":
+                arrayAdapter = new ArrayAdapter<String>(this, R.layout.list_view_cell_content, R.id.listCell, output_encode);
+                listTitle.setText("Output Encoding");
+                break;
 
         }
         //simpleList = (ListView) findViewById(R.id.relList);
@@ -110,7 +121,7 @@ public class ListDisplay extends Activity {
     public void doOnItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
         String dataStr = "";
-        Toast.makeText(this, arrayAdapter.getItem(i), Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, arrayAdapter.getItem(i), Toast.LENGTH_LONG).show();
         Intent intent = new Intent(this,MainActivity.class);
         switch (value){
             case "1": intent.putExtra("InputType",arrayAdapter.getItem(i));break;

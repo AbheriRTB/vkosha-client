@@ -12,9 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.content.Intent;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.lang.String;
 
@@ -157,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        Toast.makeText(this,"Going to next activity" + input_code, Toast.LENGTH_LONG).show();
+        //Toast.makeText(this,"Going to next activity" + input_code, Toast.LENGTH_LONG).show();
         startActivity(intent);
     }
 
@@ -166,7 +164,7 @@ public class MainActivity extends AppCompatActivity {
 
         EditText padam_txt;
 
-        Intent intent = new Intent(this,MultiTextViewDisplay.class);
+        Intent intent = new Intent(this, DisplaySynonyms.class);
         padam_txt = (EditText)findViewById(R.id.ppadam);
         ppadam_text = padam_txt.getText().toString();
 
