@@ -1,9 +1,9 @@
 package abheri.com.vaijayantikosha;
 
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.view.ViewGroup.LayoutParams;
@@ -11,7 +11,6 @@ import android.widget.TextView;
 import android.content.Intent;
 import android.widget.Toast;
 
-import com.google.android.flexbox.FlexDirection;
 import com.google.android.flexbox.FlexWrap;
 import com.google.android.flexbox.FlexboxLayout;
 
@@ -33,7 +32,7 @@ public class DisplaySynonyms extends AppCompatActivity implements View.OnClickLi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.multi_textview);
+        setContentView(R.layout.display_synonyms);
 
         Intent intent = getIntent();
 
@@ -62,26 +61,53 @@ public class DisplaySynonyms extends AppCompatActivity implements View.OnClickLi
                     LayoutParams.WRAP_CONTENT);
             rlp.topMargin = 30;
             flexboxLayout.setLayoutParams(rlp);
-            linearLayout.addView(flexboxLayout);
 
             List<Vkosha> vkList = vkoshaListDetail.get(i);
-
-            //Show Headword
-            TextView hdTextView = new TextView(this); //dynamically create textview
-            hdTextView.setId((int)1000);
             RelativeLayout.LayoutParams params =
                     new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT,
                             LayoutParams.WRAP_CONTENT);
-            hdTextView.setTextSize((float)25.0);
-            hdTextView.setLayoutParams(params);
-            hdTextView.setTextColor(getResources().getColor(myblue));
-            String arthaVarga = "अर्थः -  "+ vkList.get(0).headword + " | " +
-                    "Meaning - " + vkList.get(0).eng_meaning + " | " +
-                    "विवरणम् - " +  vkList.get(0).sans_meaning + " | " +
-                    "वर्गः - " + vkList.get(0).adhyaya + "| ";
+            params.topMargin = 30;
 
-            hdTextView.setText(arthaVarga); //adding text
-            flexboxLayout.addView(hdTextView, params);
+            String tvStr="";
+            //Show Header Fields
+            //----- Artha ----
+            TextView hTextview1 = new TextView(this); //dynamically create textview
+            hTextview1.setTextSize((float)25.0);
+            hTextview1.setLayoutParams(params);
+            hTextview1.setTextColor(getResources().getColor(myblue));
+            tvStr = "अर्थः -  "+ vkList.get(0).headword;
+            hTextview1.setText(tvStr); //adding text
+            linearLayout.addView(hTextview1, params);
+
+            params.topMargin = 0;
+            //----- Meaning ----
+            TextView hTextview2 = new TextView(this); //dynamically create textview
+            hTextview2.setTextSize((float)25.0);
+            hTextview2.setLayoutParams(params);
+            hTextview2.setTextColor(getResources().getColor(myblue));
+            tvStr = "Meaning - " + vkList.get(0).eng_meaning;
+            hTextview2.setText(tvStr); //adding text
+            linearLayout.addView(hTextview2, params);
+
+            //----- Vivaranam ----
+            TextView hTextview3 = new TextView(this); //dynamically create textview
+            hTextview3.setTextSize((float)25.0);
+            hTextview3.setLayoutParams(params);
+            hTextview3.setTextColor(getResources().getColor(myblue));
+            tvStr = "विवरणम् - " +  vkList.get(0).sans_meaning;
+            hTextview3.setText(tvStr); //adding text
+            linearLayout.addView(hTextview3, params);
+
+            //--- Varga ----
+            TextView hTextview4 = new TextView(this); //dynamically create textview
+            hTextview4.setTextSize((float)25.0);
+            hTextview4.setLayoutParams(params);
+            //hTextview4.setTextColor(getResources().getColor(myblue));
+            tvStr = "वर्गः - " + vkList.get(0).adhyaya;
+            hTextview4.setText(tvStr); //adding text
+            linearLayout.addView(hTextview4, params);
+
+            linearLayout.addView(flexboxLayout);
 
 
             for (int j= 0; j < vkList.size(); j++) { //looping to create 5 textviews
@@ -94,11 +120,10 @@ public class DisplaySynonyms extends AppCompatActivity implements View.OnClickLi
                 int pid;
                 if (j > 0) {
                     pid = tvArrayList.get(j - 1).getId();
-                }else {
-                    pid = hdTextView.getId();
+
+                    params.addRule(RelativeLayout.ALIGN_BASELINE, pid);
+                    params.addRule(RelativeLayout.RIGHT_OF, pid);
                 }
-                params.addRule(RelativeLayout.ALIGN_BASELINE, pid);
-                params.addRule(RelativeLayout.RIGHT_OF, pid);
                 textView.setTextSize((float)25.0);
                 textView.setLayoutParams(params);
                 String comma=", ";
@@ -189,6 +214,19 @@ public class DisplaySynonyms extends AppCompatActivity implements View.OnClickLi
         String nigama = vkoshaHashMap.get(str).nigama;
         String linga = vkoshaHashMap.get(str).linga;
 
-        Toast.makeText(this, displayStr1 + nigama + ", " + displayStr2 + linga,Toast.LENGTH_LONG).show();
+        Toast toast = Toast.makeText(this, displayStr1 +
+                            nigama + ", " + displayStr2 + linga,Toast.LENGTH_LONG);
+
+        // COde block to change the color of toast
+        View toastView = toast.getView();
+        toastView.setPadding(5,5,5,5);
+        //Gets the actual oval background of the Toast then sets the colour filter
+        toastView.getBackground().setColorFilter(getResources().getColor(android.R.color.background_light), PorterDuff.Mode.SRC_IN);
+        toastView.setBackgroundColor(getResources().getColor(R.color.lightYellow));
+        //Gets the TextView from the Toast so it can be editted
+        TextView text = toastView.findViewById(android.R.id.message);
+        text.setTextSize(18);
+        text.setTextColor(getResources().getColor(R.color.mygreen));
+        toast.show();
     }
 }

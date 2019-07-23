@@ -16,6 +16,10 @@
             android:label="@string/title_activity_list_display"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
+            android:name=".ListViewActivity"
+            android:label="@string/title_activity_list_display"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".DisplaySynonyms"
             android:label="@string/title_activity_list_display"
             android:theme="@style/AppTheme.NoActionBar"></activity>

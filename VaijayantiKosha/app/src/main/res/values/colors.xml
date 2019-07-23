@@ -6,4 +6,9 @@
     <color name="myred">#FF0000</color>
     <color name="myblue">#0000FF</color>
     <color name="mygreen">#1BBF63</color>
+    <color name="lightYellow">#F9E79F</color>
+    <color name="lightGray">#BBBBBB</color>
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
 </resources>
+

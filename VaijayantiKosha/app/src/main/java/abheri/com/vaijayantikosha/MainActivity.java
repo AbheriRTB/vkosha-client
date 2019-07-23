@@ -23,6 +23,9 @@ public class MainActivity extends AppCompatActivity {
     String relation = "", in_code= "",out_code = "";
     TextView relationTV, in_codeTV,out_codeTV;
     SharedPreferences mySP;
+
+
+
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
@@ -141,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
         EditText inp_txt, out_txt;
 
 
-        Intent intent = new Intent(this, ListDisplay.class);
+        Intent intent = new Intent(this, ListViewActivity.class);
         inp_txt = (EditText)findViewById(R.id.inputEncode);
         out_txt = (EditText)findViewById(R.id.outputEncode);
 
