@@ -3,10 +3,13 @@
     android:orientation="vertical" android:layout_width="fill_parent"
     android:layout_height="fill_parent">
 
-    <ImageView android:id="@+id/splashscreen" android:layout_width="wrap_content"
+    <ImageView
+        android:id="@+id/splashscreen"
+        android:layout_width="wrap_content"
         android:layout_height="fill_parent"
-        android:src="@drawable/rama_lakshmana_seethe"
-        android:layout_gravity="center"/>
+        android:layout_gravity="fill"
+        android:scaleType="centerCrop"
+        android:src="@drawable/vaiyanthi_kosha_splash" />
 
     <TextView android:layout_width="fill_parent"
         android:layout_height="wrap_content"
