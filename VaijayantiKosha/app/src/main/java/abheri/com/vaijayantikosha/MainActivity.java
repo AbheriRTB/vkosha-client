@@ -20,15 +20,13 @@ public class MainActivity extends AppCompatActivity {
 
     String ppadam_text = "";
     String dataStr = "";
-    String relation = "", in_code= "",out_code = "";
-    TextView relationTV, in_codeTV,out_codeTV;
+    String relation = "", in_code = "", out_code = "";
+    TextView relationTV, in_codeTV, out_codeTV;
     SharedPreferences mySP;
 
 
-
     @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mySP = getSharedPreferences("VKSP", MODE_PRIVATE);
 
@@ -50,12 +48,12 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //First read the values from the Shared preference and update TextViews
-        if(mySP != null){
-            if(mySP.contains("Relation"))
+        if (mySP != null) {
+            if (mySP.contains("Relation"))
                 relation = mySP.getString("Relation", "");
-            if(mySP.contains("InputType"))
+            if (mySP.contains("InputType"))
                 in_code = mySP.getString("InputType", "");
-            if(mySP.contains("OutputType"))
+            if (mySP.contains("OutputType"))
                 out_code = mySP.getString("OutputType", "");
 
             relationTV.setText(relation);
@@ -89,11 +87,11 @@ public class MainActivity extends AppCompatActivity {
         // killed and restarted.
         SharedPreferences.Editor ed = mySP.edit();
 
-        if(relation != null && relation != "")
+        if (relation != null && relation != "")
             ed.putString("Relation", relation);
-        if(in_code != null && in_code != "")
+        if (in_code != null && in_code != "")
             ed.putString("InputType", in_code);
-        if(out_code != null && out_code != "")
+        if (out_code != null && out_code != "")
             ed.putString("OutputType", out_code);
 
         ed.commit();
@@ -121,32 +119,28 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void input_clicked(View view){
+    public void input_clicked(View view) {
         //EditText inp_txt, out_txt;
-
         list_to_be_displayed("1");
     }
 
     public void rel_clicked(View view) {
-
         list_to_be_displayed("2");
     }
 
-
     public void output_clicked(View view) {
         //EditText inp_txt, out_txt;
-
         list_to_be_displayed("3");
     }
 
 
-    public void list_to_be_displayed(String val){
+    public void list_to_be_displayed(String val) {
         EditText inp_txt, out_txt;
 
 
         Intent intent = new Intent(this, ListViewActivity.class);
-        inp_txt = (EditText)findViewById(R.id.inputEncode);
-        out_txt = (EditText)findViewById(R.id.outputEncode);
+        inp_txt = (EditText) findViewById(R.id.inputEncode);
+        out_txt = (EditText) findViewById(R.id.outputEncode);
 
         String input_code = inp_txt.getText().toString();
         String output_code = out_txt.getText().toString();
@@ -156,19 +150,17 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("OUTPUT_ENCODE", output_code);
         intent.putExtra("SEL_VALUE", val);
 
-
-
         //Toast.makeText(this,"Going to next activity" + input_code, Toast.LENGTH_LONG).show();
         startActivity(intent);
     }
 
 
-    public void submit_click(View view){
+    public void submit_click(View view) {
 
         EditText padam_txt;
 
         Intent intent = new Intent(this, DisplaySynonyms.class);
-        padam_txt = (EditText)findViewById(R.id.ppadam);
+        padam_txt = (EditText) findViewById(R.id.ppadam);
         ppadam_text = padam_txt.getText().toString();
 
         try {
@@ -177,15 +169,15 @@ public class MainActivity extends AppCompatActivity {
             gdt.start();
             gdt.join();
             dataStr = ((GetData) gdr).getReturnStr();
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
 
-       /* Toast.makeText(MainActivity.this, ppadam_text + "---->" + dataStr, Toast.LENGTH_LONG).show(); */
+        /* Toast.makeText(MainActivity.this, ppadam_text + "---->" + dataStr, Toast.LENGTH_LONG).show(); */
         intent.putExtra("PADAM", ppadam_text);
         intent.putExtra("SYNONYMS", dataStr);
         intent.putExtra("RELATION", relation);
-        intent.putExtra("IN_TYPE",in_code);
+        intent.putExtra("IN_TYPE", in_code);
         intent.putExtra("OUT_TYPE", out_code);
 
         startActivity(intent);
@@ -193,8 +185,6 @@ public class MainActivity extends AppCompatActivity {
         //Log.v("VK","the word : "+ txt);
         //Toast.makeText(MainActivity.this, "Button Clicked", Toast.LENGTH_SHORT).show();
     }
-
-
 
 
 }

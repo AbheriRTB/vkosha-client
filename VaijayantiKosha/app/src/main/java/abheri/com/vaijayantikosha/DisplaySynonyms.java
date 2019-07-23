@@ -226,7 +226,7 @@ public class DisplaySynonyms extends AppCompatActivity implements View.OnClickLi
         //Gets the TextView from the Toast so it can be editted
         TextView text = toastView.findViewById(android.R.id.message);
         text.setTextSize(18);
-        text.setTextColor(getResources().getColor(R.color.mygreen));
+        text.setTextColor(getResources().getColor(myblue));
         toast.show();
     }
 }
