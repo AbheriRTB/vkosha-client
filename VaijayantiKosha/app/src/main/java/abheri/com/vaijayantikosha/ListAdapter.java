@@ -37,10 +37,12 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder>{
     public void onBindViewHolder(ViewHolder holder, final int position) {
         final String myListData = listdata[position];
         holder.textView.setText(listdata[position]);
+        /* --- Code to gray out the all the items except first one
         if(position > 0){
             holder.textView.setTextColor(context.getResources().getColor(R.color.lightGray));
             return;
         }
+        */
 
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override

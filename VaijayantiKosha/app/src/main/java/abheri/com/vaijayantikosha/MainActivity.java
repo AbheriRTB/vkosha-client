@@ -164,7 +164,12 @@ public class MainActivity extends AppCompatActivity {
         ppadam_text = padam_txt.getText().toString();
 
         try {
-            Runnable gdr = new GetData(ppadam_text);
+            Runnable gdr;
+            if (relation != null && relation != ""){
+                 gdr = new GetData(ppadam_text, relation);
+            }else {
+                 gdr = new GetData(ppadam_text);
+            }
             Thread gdt = new Thread(gdr);
             gdt.start();
             gdt.join();

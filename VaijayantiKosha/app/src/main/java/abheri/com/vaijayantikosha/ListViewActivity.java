@@ -12,7 +12,9 @@ import android.widget.ArrayAdapter;
 
 public class ListViewActivity extends Activity {
 
-    String relationList[] = {"Synsets", "Ontology", "Holonym", "Meronym", "Hypernym", "Hyponym"};
+
+    String relationList[] = Util.getRelationArray();
+
     String input_encode[] = {"Unicode-Devanagari","WX-alphabetic"};
     String output_encode[] = {"Unicode-Devanagari", "Roman-Diacritic"};
     String listType = "1";

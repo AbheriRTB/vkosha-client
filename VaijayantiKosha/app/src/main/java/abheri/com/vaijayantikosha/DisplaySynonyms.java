@@ -181,9 +181,9 @@ public class DisplaySynonyms extends AppCompatActivity implements View.OnClickLi
                         tmpVkosha.janyajanaka = jo.getString("janyajanaka");
                         tmpVkosha.patipatni = jo.getString("patipatni");
                         tmpVkosha.swaswamy = jo.getString("swaswamy");
-                        tmpVkosha.vaishistyam = jo.getString("vaishistyam");
+                        //tmpVkosha.vaishistyam = jo.getString("vaishistyam");
                         tmpVkosha.anya = jo.getString("anya");
-                        tmpVkosha.ajivika = jo.getString("ajivika");
+                        //tmpVkosha.ajivika = jo.getString("ajivika");
                         tmpVkosha.avatara = jo.getString("avatara");
                         tmpVkosha.upadhi = jo.getString("upadhi");
 
