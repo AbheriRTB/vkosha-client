@@ -44,11 +44,13 @@ public class GetData implements Runnable {
 
             /* forming th java.net.URL object */
             /* http://abheri.pythonanywhere.com/vkosha/findword/देव */
+            String baseURL = "abheri.pythonanywhere.com";
+            //String baseURL = "10.0.2.2:5000";
             //String uri = "http://abheri.pythonanywhere.com/vkosha/findword/" + ppadam_text;
             if(relationCode == 0) {
-                 uri = "http://10.0.2.2:5000/vkosha/findword/" + ppadam_text;
+                 uri = "http://"+ baseURL +"/vkosha/findword/" + ppadam_text;
             }else{
-                 uri = "http://10.0.2.2:5000/vkosha/findrelation?wordtofind=" + ppadam_text +
+                 uri = "http://"+ baseURL +"/vkosha/findrelation?wordtofind=" + ppadam_text +
                                                                      "&relation=" + relationCode;
             }
             URL url = new URL(uri);
