@@ -43,6 +43,9 @@ public class DisplaySynonyms extends AppCompatActivity implements View.OnClickLi
         String output_type = intent.getStringExtra("OUT_TYPE");
 
         //Toast.makeText(this, "Multi Text View Display Page",Toast.LENGTH_LONG).show();
+        TextView title = (TextView)findViewById(R.id.mview_title);
+        title.setText(relation);
+
         LinearLayout linearLayout= (LinearLayout) findViewById(R.id.multitext_linear); //find the linear layout
         TextView padamTV = (TextView)findViewById(R.id.mview_padam);
         padamTV.setText(padam);
