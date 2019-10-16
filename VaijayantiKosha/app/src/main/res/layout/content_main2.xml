@@ -46,23 +46,22 @@
 
     <TextView
         android:id="@+id/inputEncodingLabel"
-        android:layout_width="126dp"
-        android:layout_height="33dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="32dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="60dp"
         android:text="Input Encoding:"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Intro" />
 
-    <EditText
+    <TextView
         android:id="@+id/inputEncode"
-        android:layout_width="180dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="24dp"
         android:layout_weight="1"
+        android:background="#FAE9C0"
+        android:clickable="true"
         android:enabled="true"
         android:hint="Select Input type"
         android:inputType="none"
@@ -70,15 +69,14 @@
         android:text="Unicode-Devanagari"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/inputEncodingLabel"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/ppadam"
         app:layout_constraintTop_toTopOf="@+id/inputEncodingLabel" />
 
     <TextView
         android:id="@+id/padamLabel"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="32dp"
         android:text="Pratipadikam"
         android:textSize="18sp"
@@ -89,74 +87,72 @@
         android:id="@+id/ppadam"
         android:layout_width="175dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
         android:layout_weight="1"
+        android:background="#FAE9C1"
+        android:focusedByDefault="true"
         android:inputType="textPersonName"
         android:text="गो"
-        android:focusedByDefault="true"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/padamLabel"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/relation_edit"
         app:layout_constraintTop_toTopOf="@+id/padamLabel" />
 
 
     <TextView
         android:id="@+id/relationLabel"
-        android:layout_width="85dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
+        android:layout_width="133dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="32dp"
         android:layout_weight="1"
         android:text="Relation"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ppadam" />
+        app:layout_constraintTop_toBottomOf="@+id/padamLabel" />
 
-    <EditText
+    <TextView
         android:id="@+id/relation_edit"
         android:layout_width="176dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
+        android:background="#FAE9C0"
+        android:clickable="true"
         android:hint="Select a Realtion"
         android:onClick="rel_clicked"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/relationLabel"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/relationLabel"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintStart_toStartOf="@+id/outputEncode"
+        app:layout_constraintTop_toTopOf="@+id/relationLabel" />
 
     <TextView
         android:id="@+id/outputEncodeLabel"
-        android:layout_width="114dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
+        android:layout_width="134dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
         android:layout_weight="1"
-        android:text="Output Encoding:"
         android:enabled="true"
+        android:text="Output Encoding:"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/outputEncode"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relationLabel" />
 
 
-    <EditText
+    <TextView
         android:id="@+id/outputEncode"
         android:layout_width="181dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
         android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
-        android:inputType="textPersonName"
+        android:background="#FAE9C0"
+        android:clickable="true"
         android:enabled="true"
-        android:text=""
         android:hint="Select Output Encoding"
+        android:inputType="textPersonName"
         android:onClick="output_clicked"
+        android:text=""
         android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/outputEncodeLabel"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relation_edit" />
+        app:layout_constraintTop_toTopOf="@+id/outputEncodeLabel" />
 
 
     <Button

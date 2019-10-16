@@ -77,7 +77,7 @@ public class DisplaySynonyms extends AppCompatActivity implements View.OnClickLi
             TextView hTextview1 = new TextView(this); //dynamically create textview
             hTextview1.setTextSize((float)25.0);
             hTextview1.setLayoutParams(params);
-            hTextview1.setTextColor(getResources().getColor(myblue));
+            hTextview1.setTextColor(getResources().getColor(R.color.mygreen));
             tvStr = "अर्थः -  "+ vkList.get(0).headword;
             hTextview1.setText(tvStr); //adding text
             linearLayout.addView(hTextview1, params);
@@ -85,7 +85,7 @@ public class DisplaySynonyms extends AppCompatActivity implements View.OnClickLi
             params.topMargin = 0;
             //----- Meaning ----
             TextView hTextview2 = new TextView(this); //dynamically create textview
-            hTextview2.setTextSize((float)25.0);
+            hTextview2.setTextSize((float)20.0);
             hTextview2.setLayoutParams(params);
             hTextview2.setTextColor(getResources().getColor(myblue));
             tvStr = "Meaning - " + vkList.get(0).eng_meaning;
@@ -105,7 +105,7 @@ public class DisplaySynonyms extends AppCompatActivity implements View.OnClickLi
             TextView hTextview4 = new TextView(this); //dynamically create textview
             hTextview4.setTextSize((float)25.0);
             hTextview4.setLayoutParams(params);
-            //hTextview4.setTextColor(getResources().getColor(myblue));
+            hTextview4.setTextColor(getResources().getColor(R.color.myred));
             tvStr = "वर्गः - " + vkList.get(0).adhyaya;
             hTextview4.setText(tvStr); //adding text
             linearLayout.addView(hTextview4, params);
@@ -118,6 +118,7 @@ public class DisplaySynonyms extends AppCompatActivity implements View.OnClickLi
                 TextView textView = new TextView(this); //dynamically create textview
                 textView.setId(j + 1);
                 textView.setOnClickListener(this);
+                textView.setTextColor(getResources().getColor(R.color.black));
 
                 params = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
                 int pid;
@@ -142,7 +143,8 @@ public class DisplaySynonyms extends AppCompatActivity implements View.OnClickLi
 
     public class Vkosha {
         String headword, padam, pratam, nigama, linga, adhyaya, kanda, eng_meaning, sans_meaning, synset, avyaya,
-                parapara, janyajanaka, patipatni, swaswamy, vaishistyam, anya, ajivika, avatara, jathi, upadhi;
+                parapara, janyajanaka, patipatni, swaswamy,dharma,guna, anya,vrutti, avatara,
+                ontology;
     }
 
     public ArrayList<ArrayList<Vkosha>> parseJson(String jsonToParse) {
@@ -169,7 +171,6 @@ public class DisplaySynonyms extends AppCompatActivity implements View.OnClickLi
 
                         tmpVkosha.padam = jo.getString("padam");
                         tmpVkosha.headword = jo.getString("headword");
-                        tmpVkosha.jathi = jo.getString("jathi");
                         tmpVkosha.adhyaya = jo.getString("adhyaya");
                         tmpVkosha.linga = jo.getString("linga");
                         tmpVkosha.nigama = jo.getString("nigama");
@@ -188,7 +189,11 @@ public class DisplaySynonyms extends AppCompatActivity implements View.OnClickLi
                         tmpVkosha.anya = jo.getString("anya");
                         //tmpVkosha.ajivika = jo.getString("ajivika");
                         tmpVkosha.avatara = jo.getString("avatara");
-                        tmpVkosha.upadhi = jo.getString("upadhi");
+                        tmpVkosha.ontology = jo.getString("upadhi");
+                        tmpVkosha.dharma = jo.getString("dharma");
+                        tmpVkosha.guna = jo.getString("guna");
+
+
 
                         tmpVKList.add(tmpVkosha);
                         vkoshaHashMap.put(tmpVkosha.padam, tmpVkosha);

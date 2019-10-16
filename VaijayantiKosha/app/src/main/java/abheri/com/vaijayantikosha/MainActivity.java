@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     String dataStr = "";
     String relation = "", in_code = "", out_code = "";
     TextView relationTV, in_codeTV, out_codeTV;
+    EditText padam_txt;
     SharedPreferences mySP;
 
 
@@ -33,8 +34,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         relationTV = (TextView) findViewById(R.id.relation_edit);
+
         in_codeTV = (TextView) findViewById(R.id.inputEncode);
+
         out_codeTV = (TextView) findViewById(R.id.outputEncode);
+
+        padam_txt = (EditText) findViewById(R.id.ppadam);
+        ppadam_text = padam_txt.getText().toString();
 
         setSupportActionBar(toolbar);
 
@@ -75,6 +81,11 @@ public class MainActivity extends AppCompatActivity {
             out_code = intent.getStringExtra("OutputType");
             if (out_code != null && out_code != "")
                 out_codeTV.setText(out_code);
+
+            ppadam_text = intent.getStringExtra("PADAM");
+            if (ppadam_text != null && ppadam_text != "")
+                padam_txt.setText(ppadam_text);
+
         }
 
     }
@@ -135,20 +146,24 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void list_to_be_displayed(String val) {
-        EditText inp_txt, out_txt;
+        TextView inp_txt, out_txt;
+        EditText p_txt;
 
 
         Intent intent = new Intent(this, ListViewActivity.class);
-        inp_txt = (EditText) findViewById(R.id.inputEncode);
-        out_txt = (EditText) findViewById(R.id.outputEncode);
+        inp_txt = (TextView) findViewById(R.id.inputEncode);
+        out_txt = (TextView) findViewById(R.id.outputEncode);
+        p_txt = (EditText) findViewById(R.id.ppadam);
 
         String input_code = inp_txt.getText().toString();
         String output_code = out_txt.getText().toString();
+        String padam_text = p_txt.getText().toString();
 
 
         intent.putExtra("INPUT_ENCODE", input_code);
         intent.putExtra("OUTPUT_ENCODE", output_code);
         intent.putExtra("SEL_VALUE", val);
+        intent.putExtra("PADAM", padam_text);
 
         //Toast.makeText(this,"Going to next activity" + input_code, Toast.LENGTH_LONG).show();
         startActivity(intent);

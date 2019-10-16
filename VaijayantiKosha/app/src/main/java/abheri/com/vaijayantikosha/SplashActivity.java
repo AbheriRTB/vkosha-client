@@ -17,13 +17,6 @@ public class SplashActivity extends Activity {
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         setContentView(R.layout.splashscreen);
-        ImageView iv = findViewById(R.id.splashscreen);
-        int rnd = (int) (Math.random()*10);
-        if(rnd%2 == 0){
-            iv.setImageResource(R.drawable.vaiyanthi_kosha_splash);
-        }else{
-            iv.setImageResource(R.drawable.vaiyanthi_kosha_splash_v2);
-        }
 
         /* New Handler to start the Menu-Activity
          * and close this Splash-Screen after some seconds.*/

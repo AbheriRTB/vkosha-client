@@ -18,6 +18,7 @@ public class ListViewActivity extends Activity {
     String input_encode[] = {"Unicode-Devanagari","WX-alphabetic"};
     String output_encode[] = {"Unicode-Devanagari", "Roman-Diacritic"};
     String listType = "1";
+    String padam_text = "";
     ListAdapter listAdapter;
 
     @Override
@@ -37,18 +38,19 @@ public class ListViewActivity extends Activity {
         Intent intent = getIntent();
         if (intent != null) {
             listType = intent.getStringExtra("SEL_VALUE");
+            padam_text = intent.getStringExtra("PADAM");
         }
         switch (listType){
             case "1":
-                listAdapter = new ListAdapter(input_encode, this, listType);
+                listAdapter = new ListAdapter(input_encode, this, listType, padam_text);
                 toolbar.setTitle("Input Encoding");
                 break;
             case "2":
-                listAdapter = new ListAdapter(relationList, this, listType);
+                listAdapter = new ListAdapter(relationList, this, listType, padam_text);
                 toolbar.setTitle("Relations");
                 break;
             case "3":
-                listAdapter = new ListAdapter(output_encode, this, listType);
+                listAdapter = new ListAdapter(output_encode, this, listType, padam_text);
                 toolbar.setTitle("Output Encoding");
                 break;
 

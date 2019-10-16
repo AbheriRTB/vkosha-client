@@ -18,12 +18,14 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder>{
     private String[] listdata;
     Context context;
     String listType ="";
+    String padam = "";
 
     // RecyclerView recyclerView;
-    public ListAdapter(String[] listdata, Context con, String lstTyp) {
+    public ListAdapter(String[] listdata, Context con, String lstTyp, String padam_text) {
         this.listdata = listdata;
         context = con;
         listType = lstTyp;
+        padam = padam_text;
     }
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -48,6 +50,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder>{
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context,MainActivity.class);
+                intent.putExtra("PADAM", padam);
                 switch (listType){
                     case "1": intent.putExtra("InputType",myListData);break;
                     case "2": intent.putExtra("Relation", myListData);break;
