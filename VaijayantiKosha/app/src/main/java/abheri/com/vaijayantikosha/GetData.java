@@ -44,8 +44,8 @@ public class GetData implements Runnable {
 
             /* forming th java.net.URL object */
             /* http://abheri.pythonanywhere.com/vkosha/findword/देव */
-            String baseURL = "abheri.pythonanywhere.com";
-            //String baseURL = "10.0.2.2:5000";
+            String baseURL = "abheri.pythonanywhere.com"; //for production
+            //String baseURL = "10.0.2.2:5000"; //for emulator
             //String uri = "http://abheri.pythonanywhere.com/vkosha/findword/" + ppadam_text;
             if(relationCode == 0) {
                  uri = "http://"+ baseURL +"/vkosha/findword/" + ppadam_text;
@@ -53,6 +53,7 @@ public class GetData implements Runnable {
                  uri = "http://"+ baseURL +"/vkosha/findrelation?wordtofind=" + ppadam_text +
                                                                      "&relation=" + relationCode;
             }
+            System.out.println("URI IS: " + uri);
             URL url = new URL(uri);
             urlConnection = (HttpURLConnection) url.openConnection();
 

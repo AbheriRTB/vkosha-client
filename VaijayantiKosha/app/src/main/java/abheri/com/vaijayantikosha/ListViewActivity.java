@@ -47,7 +47,7 @@ public class ListViewActivity extends Activity {
                 break;
             case "2":
                 listAdapter = new ListAdapter(relationList, this, listType, padam_text);
-                toolbar.setTitle("Relations");
+                toolbar.setTitle("Relation");
                 break;
             case "3":
                 listAdapter = new ListAdapter(output_encode, this, listType, padam_text);

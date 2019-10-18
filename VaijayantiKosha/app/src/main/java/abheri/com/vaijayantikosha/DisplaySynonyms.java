@@ -1,9 +1,13 @@
 package abheri.com.vaijayantikosha;
 
+import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.print.PrintAttributes;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Display;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.view.ViewGroup.LayoutParams;
@@ -28,6 +32,7 @@ public class DisplaySynonyms extends AppCompatActivity implements View.OnClickLi
     ArrayList<TextView> tvArrayList = new ArrayList<TextView>();
     ArrayList<ArrayList<Vkosha>> vkoshaListDetail = new ArrayList<ArrayList<Vkosha>>();
     HashMap<String, Vkosha> vkoshaHashMap = new HashMap<String, Vkosha>();
+    LinearLayout linearLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,14 +51,23 @@ public class DisplaySynonyms extends AppCompatActivity implements View.OnClickLi
         TextView title = (TextView)findViewById(R.id.mview_title);
         title.setText(relation);
 
-        LinearLayout linearLayout= (LinearLayout) findViewById(R.id.multitext_linear); //find the linear layout
+        linearLayout = (LinearLayout) findViewById(R.id.multitext_linear); //find the linear layout
         TextView padamTV = (TextView)findViewById(R.id.mview_padam);
         padamTV.setText(padam);
 
 
+        System.out.println("Relation:" + relation);
         vkoshaListDetail = parseJson(jsonString);
+        if(relation.equalsIgnoreCase("पदार्थतत्वविचारः (Ontology)")){
+            DisplayOntology(vkoshaListDetail);
+        }else{
+            DisplaySynonyms(vkoshaListDetail);
+        }
+    }
 
-        for(int i=0; i<vkoshaListDetail.size(); ++i) {
+    void DisplaySynonyms(ArrayList<ArrayList<Vkosha>> vkoshaListDetail) {
+
+        for (int i = 0; i < vkoshaListDetail.size(); ++i) {
 
             // Creating a new Flexboxlayout
             FlexboxLayout flexboxLayout = new FlexboxLayout(this);
@@ -71,21 +85,21 @@ public class DisplaySynonyms extends AppCompatActivity implements View.OnClickLi
                             LayoutParams.WRAP_CONTENT);
             params.topMargin = 30;
 
-            String tvStr="";
+            String tvStr = "";
             //Show Header Fields
             //----- Artha ----
             TextView hTextview1 = new TextView(this); //dynamically create textview
-            hTextview1.setTextSize((float)25.0);
+            hTextview1.setTextSize((float) 25.0);
             hTextview1.setLayoutParams(params);
             hTextview1.setTextColor(getResources().getColor(R.color.mygreen));
-            tvStr = "अर्थः -  "+ vkList.get(0).headword;
+            tvStr = "अर्थः -  " + vkList.get(0).headword;
             hTextview1.setText(tvStr); //adding text
             linearLayout.addView(hTextview1, params);
 
             params.topMargin = 0;
             //----- Meaning ----
             TextView hTextview2 = new TextView(this); //dynamically create textview
-            hTextview2.setTextSize((float)20.0);
+            hTextview2.setTextSize((float) 20.0);
             hTextview2.setLayoutParams(params);
             hTextview2.setTextColor(getResources().getColor(myblue));
             tvStr = "Meaning - " + vkList.get(0).eng_meaning;
@@ -94,16 +108,16 @@ public class DisplaySynonyms extends AppCompatActivity implements View.OnClickLi
 
             //----- Vivaranam ----
             TextView hTextview3 = new TextView(this); //dynamically create textview
-            hTextview3.setTextSize((float)25.0);
+            hTextview3.setTextSize((float) 25.0);
             hTextview3.setLayoutParams(params);
             hTextview3.setTextColor(getResources().getColor(myblue));
-            tvStr = "विवरणम् - " +  vkList.get(0).sans_meaning;
+            tvStr = "विवरणम् - " + vkList.get(0).sans_meaning;
             hTextview3.setText(tvStr); //adding text
             linearLayout.addView(hTextview3, params);
 
             //--- Varga ----
             TextView hTextview4 = new TextView(this); //dynamically create textview
-            hTextview4.setTextSize((float)25.0);
+            hTextview4.setTextSize((float) 25.0);
             hTextview4.setLayoutParams(params);
             hTextview4.setTextColor(getResources().getColor(R.color.myred));
             tvStr = "वर्गः - " + vkList.get(0).adhyaya;
@@ -113,7 +127,7 @@ public class DisplaySynonyms extends AppCompatActivity implements View.OnClickLi
             linearLayout.addView(flexboxLayout);
 
 
-            for (int j= 0; j < vkList.size(); j++) { //looping to create 5 textviews
+            for (int j = 0; j < vkList.size(); j++) { //looping to create 5 textviews
 
                 TextView textView = new TextView(this); //dynamically create textview
                 textView.setId(j + 1);
@@ -128,13 +142,144 @@ public class DisplaySynonyms extends AppCompatActivity implements View.OnClickLi
                     params.addRule(RelativeLayout.ALIGN_BASELINE, pid);
                     params.addRule(RelativeLayout.RIGHT_OF, pid);
                 }
-                textView.setTextSize((float)25.0);
+                textView.setTextSize((float) 25.0);
                 textView.setLayoutParams(params);
-                String comma=", ";
-                if(j == vkList.size()-1)
+                String comma = ", ";
+                if (j == vkList.size() - 1)
                     comma = "";
                 textView.setText(vkList.get(j).padam + comma); //adding text
                 flexboxLayout.addView(textView, params); //inflating :)
+
+                tvArrayList.add(textView);
+            }
+        }
+    }
+
+    void DisplayOntology(ArrayList<ArrayList<Vkosha>> vkoshaListDetail) {
+
+        for (int i = 0; i < vkoshaListDetail.size(); ++i) {
+
+            // Creating a new Flexboxlayout
+            RelativeLayout relativeLayout = new RelativeLayout(this);
+            //relativeLayout.setFlexWrap(FlexWrap.WRAP);
+
+            FlexboxLayout.LayoutParams rlp = new FlexboxLayout.LayoutParams(
+                    LayoutParams.WRAP_CONTENT,
+                    LayoutParams.WRAP_CONTENT);
+            rlp.topMargin = 30;
+            relativeLayout.setLayoutParams(rlp);
+
+            List<Vkosha> vkList = vkoshaListDetail.get(i);
+            RelativeLayout.LayoutParams params =
+                    new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT,
+                            LayoutParams.WRAP_CONTENT);
+            params.topMargin = 30;
+
+            String tvStr = "";
+            /*
+            //Show Header Fields
+            //----- Artha ----
+            TextView hTextview1 = new TextView(this); //dynamically create textview
+            hTextview1.setTextSize((float) 25.0);
+            hTextview1.setLayoutParams(params);
+            hTextview1.setTextColor(getResources().getColor(R.color.mygreen));
+            tvStr = "अर्थः -  " + vkList.get(0).headword;
+            hTextview1.setText(tvStr); //adding text
+            linearLayout.addView(hTextview1, params);
+
+            params.topMargin = 0;
+            //----- Meaning ----
+            TextView hTextview2 = new TextView(this); //dynamically create textview
+            hTextview2.setTextSize((float) 20.0);
+            hTextview2.setLayoutParams(params);
+            hTextview2.setTextColor(getResources().getColor(myblue));
+            tvStr = "Meaning - " + vkList.get(0).eng_meaning;
+            hTextview2.setText(tvStr); //adding text
+            linearLayout.addView(hTextview2, params);
+
+            //----- Vivaranam ----
+            TextView hTextview3 = new TextView(this); //dynamically create textview
+            hTextview3.setTextSize((float) 25.0);
+            hTextview3.setLayoutParams(params);
+            hTextview3.setTextColor(getResources().getColor(myblue));
+            tvStr = "विवरणम् - " + vkList.get(0).sans_meaning;
+            hTextview3.setText(tvStr); //adding text
+            linearLayout.addView(hTextview3, params);
+
+            //--- Varga ----
+            TextView hTextview4 = new TextView(this); //dynamically create textview
+            hTextview4.setTextSize((float) 25.0);
+            hTextview4.setLayoutParams(params);
+            hTextview4.setTextColor(getResources().getColor(R.color.myred));
+            tvStr = "वर्गः - " + vkList.get(0).adhyaya;
+            hTextview4.setText(tvStr); //adding text
+            linearLayout.addView(hTextview4, params);
+            */
+
+            if(i > 0){
+                View viewDivider = new View(this);
+                //viewDivider.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                viewDivider.setBackgroundColor(Color.parseColor("#000000"));
+                int dividerHeight = (int)getResources().getDisplayMetrics().density * 1; // 1dp to pixels
+                viewDivider.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dividerHeight));
+
+                linearLayout.addView(viewDivider);
+            }
+
+            TextView textViewJati = new TextView(this);
+            textViewJati.setTextColor(getResources().getColor(R.color.mygreen));
+            textViewJati.setTextSize((float) 27.0);
+            textViewJati.setText("जाति");
+            linearLayout.addView(textViewJati);
+
+            linearLayout.addView(relativeLayout);
+
+
+            for (int j = 0; j < vkList.size(); j++) { //looping to create 5 textviews
+
+                boolean upadhiProcessed = false;
+                TextView textView = new TextView(this); //dynamically create textview
+                textView.setId(j + 1);
+                //textView.setOnClickListener(this);
+                textView.setTextColor(getResources().getColor(R.color.black));
+
+                params = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+                int pid;
+                if (j > 0) {
+                    pid = tvArrayList.get(j - 1).getId();
+
+                    //params.addRule(RelativeLayout.ALIGN_BOTTOM, pid);
+                    params.addRule(RelativeLayout.BELOW, pid);
+                }
+                textView.setTextSize((float) 25.0);
+                textView.setLayoutParams(params);
+                String comma = ", ";
+                if (j == vkList.size() - 1)
+                    comma = "";
+
+                String ont = vkList.get(j).ontology;
+
+                if(ont != null && ont.contains("_up")){
+                    if(!upadhiProcessed) {
+                        TextView textViewUpadhi = new TextView(this);
+                        textViewUpadhi.setTextColor(getResources().getColor(R.color.mygreen));
+                        textViewUpadhi.setTextSize((float) 27.0);
+                        textViewUpadhi.setLayoutParams(params);
+                        textViewUpadhi.setText("उपाधि");
+                        textViewUpadhi.setId((int) 9999);
+
+                        relativeLayout.addView(textViewUpadhi);
+
+                        params = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+                        params.addRule(RelativeLayout.BELOW, (int) 9999);
+                        upadhiProcessed = true;
+                    }
+
+                    ont = ont.substring(0, ont.length()-3);
+                }
+
+                textView.setText("===> " + ont ); //adding text
+                relativeLayout.addView(textView, params); //inflating :)
 
                 tvArrayList.add(textView);
             }
@@ -189,7 +334,7 @@ public class DisplaySynonyms extends AppCompatActivity implements View.OnClickLi
                         tmpVkosha.anya = jo.getString("anya");
                         //tmpVkosha.ajivika = jo.getString("ajivika");
                         tmpVkosha.avatara = jo.getString("avatara");
-                        tmpVkosha.ontology = jo.getString("upadhi");
+                        tmpVkosha.ontology = jo.getString("onto_word");
                         tmpVkosha.dharma = jo.getString("dharma");
                         tmpVkosha.guna = jo.getString("guna");
 
@@ -217,7 +362,7 @@ public class DisplaySynonyms extends AppCompatActivity implements View.OnClickLi
         if(str.indexOf(',') != -1) //Last padam in the list will not contain comma & space at the end
             str = str.substring(0, str.length()-2);
 
-        String displayStr1 = "काण्ड, वर्ग, श्लोक, पाद :: ";
+        String displayStr1 = "काण्डः, अध्यायः, श्लोकः, पादः, पदसङ्ख्या :: ";
         String displayStr2 = "लिंग :: ";
         String nigama = vkoshaHashMap.get(str).nigama;
         String linga = vkoshaHashMap.get(str).linga;
