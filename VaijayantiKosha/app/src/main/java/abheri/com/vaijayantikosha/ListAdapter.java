@@ -45,6 +45,12 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder>{
             return;
         }
         */
+        String txt = (String)holder.textView.getText();
+        if(txt != null &&
+                (txt.equalsIgnoreCase("WX-alphabetic") || txt.equalsIgnoreCase("Roman-Diacritic"))){
+            holder.textView.setTextColor(context.getResources().getColor(R.color.lightGray));
+            return;
+        }
 
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override

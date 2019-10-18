@@ -33,15 +33,8 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        relationTV = (TextView) findViewById(R.id.relation_edit);
 
-        in_codeTV = (TextView) findViewById(R.id.inputEncode);
-
-        out_codeTV = (TextView) findViewById(R.id.outputEncode);
-
-        padam_txt = (EditText) findViewById(R.id.ppadam);
-        ppadam_text = padam_txt.getText().toString();
-
+        readTextViewValues();
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -146,24 +139,14 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void list_to_be_displayed(String val) {
-        TextView inp_txt, out_txt;
-        EditText p_txt;
-
 
         Intent intent = new Intent(this, ListViewActivity.class);
-        inp_txt = (TextView) findViewById(R.id.inputEncode);
-        out_txt = (TextView) findViewById(R.id.outputEncode);
-        p_txt = (EditText) findViewById(R.id.ppadam);
 
-        String input_code = inp_txt.getText().toString();
-        String output_code = out_txt.getText().toString();
-        String padam_text = p_txt.getText().toString();
-
-
-        intent.putExtra("INPUT_ENCODE", input_code);
-        intent.putExtra("OUTPUT_ENCODE", output_code);
+        readTextViewValues();
+        intent.putExtra("INPUT_ENCODE", in_code);
+        intent.putExtra("OUTPUT_ENCODE", out_code);
         intent.putExtra("SEL_VALUE", val);
-        intent.putExtra("PADAM", padam_text);
+        intent.putExtra("PADAM", ppadam_text);
 
         //Toast.makeText(this,"Going to next activity" + input_code, Toast.LENGTH_LONG).show();
         startActivity(intent);
@@ -172,11 +155,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void submit_click(View view) {
 
-        EditText padam_txt;
-
         Intent intent = new Intent(this, DisplaySynonyms.class);
-        padam_txt = (EditText) findViewById(R.id.ppadam);
-        ppadam_text = padam_txt.getText().toString();
+        readTextViewValues();
 
         try {
             Runnable gdr;
@@ -204,6 +184,22 @@ public class MainActivity extends AppCompatActivity {
 
         //Log.v("VK","the word : "+ txt);
         //Toast.makeText(MainActivity.this, "Button Clicked", Toast.LENGTH_SHORT).show();
+    }
+
+    public void readTextViewValues(){
+
+        relationTV = (TextView) findViewById(R.id.relation_edit);
+        relation = relationTV.getText().toString();
+
+        in_codeTV = (TextView) findViewById(R.id.inputEncode);
+        in_code = in_codeTV.getText().toString();
+
+        out_codeTV = (TextView) findViewById(R.id.outputEncode);
+        out_code = out_codeTV.getText().toString();
+
+        padam_txt = (EditText) findViewById(R.id.ppadam);
+        ppadam_text = padam_txt.getText().toString();
+
     }
 
 

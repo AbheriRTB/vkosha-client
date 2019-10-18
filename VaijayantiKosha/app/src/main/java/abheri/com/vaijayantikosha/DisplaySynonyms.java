@@ -229,7 +229,7 @@ public class DisplaySynonyms extends AppCompatActivity implements View.OnClickLi
             TextView textViewJati = new TextView(this);
             textViewJati.setTextColor(getResources().getColor(R.color.mygreen));
             textViewJati.setTextSize((float) 27.0);
-            textViewJati.setText("जाति");
+            textViewJati.setText("जातिः");
             linearLayout.addView(textViewJati);
 
             linearLayout.addView(relativeLayout);
