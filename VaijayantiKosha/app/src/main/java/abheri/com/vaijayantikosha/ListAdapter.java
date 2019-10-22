@@ -47,7 +47,10 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder>{
         */
         String txt = (String)holder.textView.getText();
         if(txt != null &&
-                (txt.equalsIgnoreCase("WX-alphabetic") || txt.equalsIgnoreCase("Roman-Diacritic"))){
+                (txt.equalsIgnoreCase("WX-alphabetic") ||
+                        txt.equalsIgnoreCase("Roman-Diacritic") ||
+                        txt.equalsIgnoreCase("All Relations")
+                )){
             holder.textView.setTextColor(context.getResources().getColor(R.color.lightGray));
             return;
         }

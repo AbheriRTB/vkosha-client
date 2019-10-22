@@ -216,8 +216,11 @@ public class DisplaySynonyms extends AppCompatActivity implements View.OnClickLi
             linearLayout.addView(hTextview4, params);
             */
 
+
+            View viewDivider = null;
+
             if(i > 0){
-                View viewDivider = new View(this);
+                viewDivider = new View(this);
                 //viewDivider.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
                 viewDivider.setBackgroundColor(Color.parseColor("#000000"));
                 int dividerHeight = (int)getResources().getDisplayMetrics().density * 1; // 1dp to pixels
@@ -276,10 +279,21 @@ public class DisplaySynonyms extends AppCompatActivity implements View.OnClickLi
                     }
 
                     ont = ont.substring(0, ont.length()-3);
+                    textView.setText("===> " + ont); //adding text
+                    relativeLayout.addView(textView, params); //inflating :)
+                }
+                else if(ont != null && ont.length() > 0) {
+                    textView.setText("===> " + ont); //adding text
+                    relativeLayout.addView(textView, params); //inflating :)
+                }
+                else{
+                    if(viewDivider != null)
+                        viewDivider.setVisibility(View.INVISIBLE);
+                    if(textViewJati != null)
+                        textViewJati.setVisibility(View.INVISIBLE);
+
                 }
 
-                textView.setText("===> " + ont ); //adding text
-                relativeLayout.addView(textView, params); //inflating :)
 
                 tvArrayList.add(textView);
             }

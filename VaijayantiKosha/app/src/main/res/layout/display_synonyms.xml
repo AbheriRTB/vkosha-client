@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:text="Padam Word"
-            android:textColor="@color/mygreen"
+            android:textColor="@color/mypurple"
             android:textSize="28sp" />
 
     </LinearLayout>

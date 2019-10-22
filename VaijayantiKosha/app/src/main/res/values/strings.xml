@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Vaijayantīkośa</string>
     <string name="action_settings">Settings</string>
-    <string name="heading">Vaijayanthi Kosha Knowledge Net</string>
+    <string name="heading">Vaijayantīkośa Knowledge Net</string>
     <string name="intro">This mobile app helps you search words in Vaijayantīkośa and understand their meaning and various semantic relations to the given word.</string>
     <string name="title_activity_list_display">list_display</string>
 </resources>
