@@ -85,8 +85,33 @@ public class DisplaySynonyms extends AppCompatActivity implements View.OnClickLi
                             LayoutParams.WRAP_CONTENT);
             params.topMargin = 30;
 
+
+            //Add a divider line before flexbox is added
+            View viewDivider = null;
+
+            if(i > 0){
+                viewDivider = new View(this);
+                //viewDivider.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                viewDivider.setBackgroundColor(Color.parseColor("#000000"));
+                int dividerHeight = (int)getResources().getDisplayMetrics().density * 1; // 1dp to pixels
+                viewDivider.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dividerHeight));
+
+                linearLayout.addView(viewDivider);
+            }
+
+
             String tvStr = "";
             //Show Header Fields
+
+            //----- Headword ----
+            TextView hTextview0 = new TextView(this); //dynamically create textview
+            hTextview0.setTextSize((float) 25.0);
+            hTextview0.setLayoutParams(params);
+            hTextview0.setTextColor(getResources().getColor(R.color.mygreen));
+            tvStr = vkList.get(0).rel_headword;
+            hTextview0.setText(tvStr); //adding text
+            linearLayout.addView(hTextview0, params);
+
             //----- Artha ----
             TextView hTextview1 = new TextView(this); //dynamically create textview
             hTextview1.setTextSize((float) 25.0);
@@ -123,6 +148,7 @@ public class DisplaySynonyms extends AppCompatActivity implements View.OnClickLi
             tvStr = "वर्गः - " + vkList.get(0).adhyaya;
             hTextview4.setText(tvStr); //adding text
             linearLayout.addView(hTextview4, params);
+
 
             linearLayout.addView(flexboxLayout);
 
@@ -303,7 +329,7 @@ public class DisplaySynonyms extends AppCompatActivity implements View.OnClickLi
     public class Vkosha {
         String headword, padam, pratam, nigama, linga, adhyaya, kanda, eng_meaning, sans_meaning, synset, avyaya,
                 parapara, janyajanaka, patipatni, swaswamy,dharma,guna, anya,vrutti, avatara,
-                ontology;
+                ontology, rel_headword;
     }
 
     public ArrayList<ArrayList<Vkosha>> parseJson(String jsonToParse) {
@@ -351,6 +377,7 @@ public class DisplaySynonyms extends AppCompatActivity implements View.OnClickLi
                         tmpVkosha.ontology = jo.getString("onto_word");
                         tmpVkosha.dharma = jo.getString("dharma");
                         tmpVkosha.guna = jo.getString("guna");
+                        tmpVkosha.rel_headword = jo.getString("rel_headword");
 
 
 

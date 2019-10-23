@@ -45,11 +45,12 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder>{
             return;
         }
         */
-        String txt = (String)holder.textView.getText();
+        String txt = listdata[position];
         if(txt != null &&
                 (txt.equalsIgnoreCase("WX-alphabetic") ||
                         txt.equalsIgnoreCase("Roman-Diacritic") ||
-                        txt.equalsIgnoreCase("All Relations")
+                        txt.equalsIgnoreCase("All Relations") ||
+                        txt.equalsIgnoreCase("अवतारः")
                 )){
             holder.textView.setTextColor(context.getResources().getColor(R.color.lightGray));
             return;
@@ -75,6 +76,16 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder>{
     @Override
     public int getItemCount() {
         return listdata.length;
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return position;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
